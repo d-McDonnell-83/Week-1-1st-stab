@@ -5,27 +5,51 @@
     <title>Lab 1 | Hello, Audio</title>
 </head>
 <body>
-<button>Click Me</button>
+<button id="start">Start</button>
+<button id="stop">Stop</button>
     <script>
         //Complete Lab 1 here:
         //NOTE: your audio context needs to be stored in a variable called ctx
     const ctx = new AudioContext()
 
     let freq = 220;
+    let osc, osc2;
+    //Make my nodes
+    
+        
 
-    let osc = new OscillatorNode (ctx)
-        osc.frequency.value = freq
-        osc.connect(ctx.destination)
-        osc.start()
+    let myGain = new GainNode(ctx);
+        myGain.gain.value = 0.125;
 
-            let osc2 = new OscillatorNode (ctx)
-        osc2.frequency.value = freq*4.1
-        osc2.connect(ctx.destination)
-        osc2.start()
+        //connect nodes 
+        
+        myGain.connect(ctx.destination);
 
+        //start my nodes
+        
 
         //Do not edit the code below here
-        document.querySelector("button").onclick = () => ctx.resume();
+        //query selectro uses CSS selectors to select elements from the DOM https://www.w3schools.com/css/css_selectors.asp
+        document.querySelector("#start").onclick = () => {
+            //code that runs when i click the start button
+            ctx.resume();
+            osc = new OscillatorNode (ctx)
+            osc.frequency.value = freq
+            osc.type = "sawtooth"
+        
+
+            osc2 = new OscillatorNode (ctx)
+            osc2.frequency.value = freq*(4.1)
+            osc.connect(myGain)
+            osc2.connect(myGain)
+            osc.start()
+            osc2.start()
+        }
+        document.querySelector("#stop").onclick = () => {
+            //code that runs when i click the stop button
+            osc.stop()
+            osc2.stop()
+        };
     </script>
 </body>
 </html>
