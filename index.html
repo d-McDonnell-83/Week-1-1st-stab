@@ -18,6 +18,10 @@
         osc.connect(ctx.destination)
         osc.start()
 
+            let osc2 = new OscillatorNode (ctx)
+        osc2.frequency.value = freq*4.1
+        osc2.connect(ctx.destination)
+        osc2.start()
 
 
         //Do not edit the code below here
