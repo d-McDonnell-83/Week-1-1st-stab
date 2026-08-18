@@ -9,6 +9,15 @@
     <script>
         //Complete Lab 1 here:
         //NOTE: your audio context needs to be stored in a variable called ctx
+    const ctx = new AudioContext()
+
+    let freq = 220;
+
+    let osc = new OscillatorNode (ctx)
+        osc.frequency.value = freq
+        osc.connect(ctx.destination)
+        osc.start()
+
 
 
         //Do not edit the code below here
